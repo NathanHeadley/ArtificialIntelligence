@@ -6,14 +6,17 @@
 
 using namespace sf;
 
-FuzzyTriangle fuzzySet[7];
-std::vector<double> rules;
+FuzzyTriangle distanceSet[5];
+FuzzyTriangle velocitySet[5];
+std::vector<double> distanceRules;
+std::vector<double> velocityRules;
 Font font;
 Sprite car;
 Texture carTexture;
 Sprite drivingLine;
 Texture drivingTexture;
 Text actionText;
+float oldPosition = 0.0f, newPosition = 0.0f;
 int stepX = 1;
 
 double getDistance();
@@ -21,27 +24,40 @@ double getDistance();
 int main() {
 	RenderWindow window(VideoMode(800, 600), "Car Driving");
 
-	fuzzySet[0].setInterval(-600, -300);
-	fuzzySet[0].setMiddle(-450);
+	#pragma region distanceSet
+	distanceSet[0].setInterval(-6, -3);
+	distanceSet[0].setMiddle(-4.5);
 
-	fuzzySet[1].setInterval(-400, -150);
-	fuzzySet[1].setMiddle(-275);
+	distanceSet[1].setInterval(-3.075, -0.075);
+	distanceSet[1].setMiddle(-1.575);
 
-	fuzzySet[2].setInterval(-200, 0);
-	fuzzySet[2].setMiddle(-100);
+	distanceSet[2].setInterval(-0.1, 0.1);
+	distanceSet[2].setMiddle(0);
 
-	fuzzySet[3].setInterval(-25, 25);
-	fuzzySet[3].setMiddle(0);
+	distanceSet[3].setInterval(0.075, 3.075);
+	distanceSet[3].setMiddle(1.575);
 
-	fuzzySet[4].setInterval(0, 200);
-	fuzzySet[4].setMiddle(100);
+	distanceSet[4].setInterval(3, 6);
+	distanceSet[4].setMiddle(4.5);
+	#pragma endregion distanceSet
 
-	fuzzySet[5].setInterval(150, 400);
-	fuzzySet[5].setMiddle(275);
+	#pragma region velocitySet
+	velocitySet[0].setInterval(-1, -0.5);
+	velocitySet[0].setMiddle(-0.75);
 
-	fuzzySet[6].setInterval(300, 600);
-	fuzzySet[6].setMiddle(450);
+	velocitySet[1].setInterval(-0.5, 0);
+	velocitySet[1].setMiddle(-0.25);
+
+	velocitySet[2].setInterval(-0.25, 0.25);
+	velocitySet[2].setMiddle(0);
 	
+	velocitySet[3].setInterval(0, 0.5);
+	velocitySet[3].setMiddle(0.25);
+
+	velocitySet[4].setInterval(0.5, 1);
+	velocitySet[4].setMiddle(0.75);
+	#pragma endregion velocitySet
+
 	font.loadFromFile("aero.ttf");
 
 	carTexture.loadFromFile("carTexture.png");
@@ -99,75 +115,135 @@ int main() {
 					stepX = 14;
 				}
 				if (event.key.code == Keyboard::Num9) {
-					stepX = 16;
+					stepX = 30;
 				}
 			}
 		}
 
-		rules.clear();
+		car.setPosition(car.getPosition() + forwardVector);
+		float ROChange = car.getPosition().x - oldPosition;
 
-		for each(FuzzyTriangle fuzzyTriangle in fuzzySet) {
-			double value = fuzzyTriangle.isInInterval(getDistance());
-			rules.push_back(value);
+		distanceRules.clear();
+		velocityRules.clear();
+
+#pragma region distanceValues
+		for each(FuzzyTriangle fuzzyTriangle in distanceSet) {
+			double value = fuzzyTriangle.isInInterval(getDistance()/100);
+			distanceRules.push_back(value);
 		}
 
-		double highest = rules[0];
-		int highestNum = 0;
-		for (int i = 0; i < rules.size(); i++) {
-			if (rules[i] > highest) {
-				highest = rules[i];
-				highestNum = i;
+		double highest = distanceRules[0];
+		int distance = -2;
+		for (int i = 0; i < distanceRules.size(); i++) {
+			if (distanceRules[i] > highest) {
+				highest = distanceRules[i];
+				distance = i - 2;
 			}
 		}
+#pragma endregion distanceValues
 
-		if (highestNum == 0) {
-			// Turn Full Right
-			forwardVector.x = 0.1 * cos(45 * 3.14159 / 180);
-			forwardVector.y = -0.01 * sin(45 * 3.14159 / 180);
-			car.setRotation(65);
-			actionText.setString("Turning full right!");
-		} else if (highestNum == 1) {
-			// Turn Very Right
-			forwardVector.x = 0.08 * cos(45 * 3.14159 / 180);
-			forwardVector.y = -0.02 * sin(45 * 3.14159 / 180);
-			car.setRotation(55);
-			actionText.setString("Turning sharp right!");
-		} else if (highestNum == 2) {
-			// Turn Right
-			forwardVector.x = 0.06 * cos(45 * 3.14159 / 180);
-			forwardVector.y = -0.03 * sin(45 * 3.14159 / 180);
-			car.setRotation(45);
-			actionText.setString("Turning right!");
-		} else if (highestNum == 3) {
-			// Drive Straight
-			forwardVector = Vector2f(0.0f, -0.04f);
-			car.setRotation(0);
-			actionText.setString("Driving straight!");
-		} else if (highestNum == 4) {
-			// Turn Left
-			forwardVector.x = -0.06 * cos(45 * 3.14159 / 180);
-			forwardVector.y = -0.03 * sin(45 * 3.14159 / 180);
-			car.setRotation(315);
-			actionText.setString("Turning left!");
-		} else if (highestNum == 5) {
-			// Turn Very Left
-			forwardVector.x = -0.08 * cos(45 * 3.14159 / 180);
-			forwardVector.y = -0.02 * sin(45 * 3.14159 / 180);
-			car.setRotation(305);
-			actionText.setString("Turning sharp left!");
-		} else if (highestNum == 6) {
-			// Turn Full Left
-			forwardVector.x = -0.1 * cos(45 * 3.14159 / 180);
-			forwardVector.y = -0.01 * sin(45 * 3.14159 / 180);
-			car.setRotation(295);
-			actionText.setString("Turning full left!");
+#pragma region velocityValues
+		for each(FuzzyTriangle fuzzyTriangle in velocitySet) {
+			double value = fuzzyTriangle.isInInterval(ROChange*10);
+			velocityRules.push_back(value);
 		}
 
-		if (car.getPosition().y + forwardVector.y > 0) {
-			car.setPosition(car.getPosition() + forwardVector);
-		} else {
-			car.setPosition(car.getPosition().x, 556);
+		highest = velocityRules[0];
+		int velocity = 0;
+		for (int i = 0; i < velocityRules.size(); i++) {
+			if (velocityRules[i] > highest) {
+				highest = velocityRules[i];
+				velocity = i;
+			}
 		}
+#pragma endregion velocityValues
+
+		if (distance == -2 && velocity == 0) {
+			forwardVector.x += 0.001;
+			actionText.setString("Turning sharp right! 0");
+		} else if (distance == -2 && velocity == 1) {
+			forwardVector.x += 0.025;
+			actionText.setString("Turning sharp right! 1");
+		} else if (distance == -2 && velocity == 2) {
+			forwardVector.x += 0.05;
+			actionText.setString("Turning sharp right! 2");
+		} else if (distance == -2 && velocity == 3) {
+			forwardVector.x += 0.075;
+			actionText.setString("Turning sharp right! 3");
+		} else if (distance == -2 && velocity == 4) {
+			forwardVector.x += 0.1;
+			actionText.setString("Turning sharp right! 4");
+
+
+		} else if (distance == -1 && velocity == 0) {
+			forwardVector.x += 0.001;
+			actionText.setString("Turning right! 0");
+		} else if (distance == -1 && velocity == 1) {
+			forwardVector.x += 0.025;
+			actionText.setString("Turning right! 1");
+		} else if (distance == -1 && velocity == 2) {
+			forwardVector.x += 0.05;
+			actionText.setString("Turning right! 2");
+		} else if (distance == -1 && velocity == 3) {
+			forwardVector.x += 0.075;
+			actionText.setString("Turning right! 3");
+		} else if (distance == -1 && velocity == 4) {
+			forwardVector.x += 0.1;
+			actionText.setString("Turning right! 4");
+
+
+		} else if (distance == 0 && velocity == 0) {
+			forwardVector.x = 0;
+			actionText.setString("Straight! 0");
+		} else if (distance == 0 && velocity == 1) {
+			forwardVector.x = 0;
+			actionText.setString("Straight! 1");
+		} else if (distance == 0 && velocity == 2) {
+			forwardVector.x = 0;
+			actionText.setString("Straight! 2");
+		} else if (distance == 0 && velocity == 3) {
+			forwardVector.x = 0;
+			actionText.setString("Straight! 3");
+		} else if (distance == 0 && velocity == 4) {
+			forwardVector.x = 0;
+			actionText.setString("Straight! 4");
+
+
+		} else if (distance == 1 && velocity == 0) {
+			forwardVector.x -= 0.001;
+			actionText.setString("Turning left! 0");
+		} else if (distance == 1 && velocity == 1) {
+			forwardVector.x -= 0.025;
+			actionText.setString("Turning left! 1");
+		} else if (distance == 1 && velocity == 2) {
+			forwardVector.x -= 0.05;
+			actionText.setString("Turning left! 2");
+		} else if (distance == 1 && velocity == 3) {
+			forwardVector.x -= 0.075;
+			actionText.setString("Turning left! 3");
+		} else if (distance == 1 && velocity == 4) {
+			forwardVector.x -= 0.1;
+			actionText.setString("Turning left! 4");
+
+
+		} else if (distance == 2 && velocity == 0) {
+			forwardVector.x -= 0.001;
+			actionText.setString("Turning left! 0");
+		} else if (distance == 2 && velocity == 1) {
+			forwardVector.x -= 0.025;
+			actionText.setString("Turning left! 1");
+		} else if (distance == 2 && velocity == 2) {
+			forwardVector.x -= 0.05;
+			actionText.setString("Turning left! 2");
+		} else if (distance == 2 && velocity == 3) {
+			forwardVector.x -= 0.075;
+			actionText.setString("Turning left! 3");
+		} else if (distance == 2 && velocity == 4) {
+			forwardVector.x -= 0.1;
+			actionText.setString("Turning left! 4");
+		}
+
+		oldPosition = car.getPosition().x;
 
 		window.clear();
 		window.draw(drivingLine);

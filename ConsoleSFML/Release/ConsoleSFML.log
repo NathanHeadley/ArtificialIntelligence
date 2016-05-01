@@ -1,32 +1,41 @@
-﻿Build started 25/04/2016 15:54:47.
-     1>Project "M:\SFML\Console SFML\ConsoleSFML\ConsoleSFML.vcxproj" on node 2 (Build target(s)).
+﻿Build started 01/05/2016 10:43:19.
+     1>Project "C:\Users\Nathan\Desktop\Intelligence\ConsoleSFML\ConsoleSFML.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"M:\SFML\Console SFML\\SFML-2.3.2\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Nathan\Desktop\Intelligence\\SFML-2.3.2\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>main.cpp(116): warning C4018: '<' : signed/unsigned mismatch
-     1>main.cpp(125): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(126): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(131): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(132): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(137): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(138): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(148): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(149): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(154): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(155): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(160): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(161): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(183): warning C4244: 'initializing' : conversion from 'const float' to 'int', possible loss of data
-     1>main.cpp(184): warning C4244: 'initializing' : conversion from 'const float' to 'int', possible loss of data
-     1>main.cpp(185): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>main.cpp(137): warning C4018: '<' : signed/unsigned mismatch
+     1>main.cpp(153): warning C4018: '<' : signed/unsigned mismatch
+     1>main.cpp(164): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>main.cpp(167): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>main.cpp(170): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>main.cpp(173): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>main.cpp(176): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>main.cpp(181): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>main.cpp(184): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>main.cpp(187): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>main.cpp(190): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>main.cpp(193): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>main.cpp(215): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>main.cpp(218): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>main.cpp(221): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>main.cpp(224): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>main.cpp(227): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>main.cpp(232): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>main.cpp(235): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>main.cpp(238): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>main.cpp(241): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>main.cpp(244): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>main.cpp(261): warning C4244: 'initializing' : conversion from 'const float' to 'int', possible loss of data
+     1>main.cpp(262): warning C4244: 'initializing' : conversion from 'const float' to 'int', possible loss of data
+     1>main.cpp(263): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"M:\SFML\Console SFML\Release\ConsoleSFML.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"M:\SFML\Console SFML\\SFML-2.3.2\lib" "sfml-graphics-s.lib" "sfml-main.lib" "sfml-window-s.lib" "sfml-system-s.lib" gdi32.lib opengl32.lib winmm.lib freetype.lib jpeg.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"M:\SFML\Console SFML\Release\ConsoleSFML.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"M:\SFML\Console SFML\Release\ConsoleSFML.lib" /MACHINE:X86 /SAFESEH Release\FuzzyTriangle.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Nathan\Desktop\Intelligence\Release\ConsoleSFML.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Nathan\Desktop\Intelligence\\SFML-2.3.2\lib" "sfml-graphics-s.lib" "sfml-main.lib" "sfml-window-s.lib" "sfml-system-s.lib" gdi32.lib opengl32.lib winmm.lib freetype.lib jpeg.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Nathan\Desktop\Intelligence\Release\ConsoleSFML.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Nathan\Desktop\Intelligence\Release\ConsoleSFML.lib" /MACHINE:X86 /SAFESEH Release\FuzzyTriangle.obj
          Release\main.obj
          Generating code
          Finished generating code
-         ConsoleSFML.vcxproj -> M:\SFML\Console SFML\Release\ConsoleSFML.exe
-     1>Done Building Project "M:\SFML\Console SFML\ConsoleSFML\ConsoleSFML.vcxproj" (Build target(s)).
+         ConsoleSFML.vcxproj -> C:\Users\Nathan\Desktop\Intelligence\Release\ConsoleSFML.exe
+     1>Done Building Project "C:\Users\Nathan\Desktop\Intelligence\ConsoleSFML\ConsoleSFML.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.07
+Time Elapsed 00:00:01.31
